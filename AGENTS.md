@@ -10,7 +10,7 @@ These are project directions, not existing implementations or configurations. Im
 
 ## Project Structure & Module Organization
 
-This workspace (`sistema-locadora`) is currently an empty project scaffold. No application source, tests, assets, or dependency manifests are present. The `.agents/`, `.codex/`, `.aws/`, and `.git/` directories are reserved workspace metadata; do not place application code in them.
+The initial backend scaffold is in `backend/`: `pom.xml`, Maven Wrapper scripts and `.mvn/wrapper/`, `checkstyle.xml`, `src/main/java/br/com/locadora/LocadoraApplication.java`, `src/main/resources/application.yaml`, and `src/test/java/br/com/locadora/LocadoraApplicationTest.java`. The root contains `README.md` and `.gitignore`. No business modules, assets, database infrastructure, or frontend are implemented yet. The `.agents/`, `.codex/`, `.aws/`, and `.git/` directories are reserved workspace metadata; do not place application code in them.
 
 When introducing the application, document its actual directory layout in this guide and a root `README.md`. Group code by feature or responsibility, keep tests easy to locate, and give static assets a dedicated directory. Avoid introducing directory structures for components that do not yet exist.
 
@@ -28,19 +28,19 @@ Introduce module packages and supporting components only when implementing their
 
 ## Build, Test, and Development Commands
 
-No build, development, test, or lint commands are currently configured. Do not assume commands such as `npm test` or `make build` work here.
+Run backend commands from `backend/`, with JDK 25: `./mvnw spring-boot:run` for local development, `./mvnw test` for tests, `./mvnw package` for the executable JAR, and `./mvnw verify` for the full build. `./mvnw spotless:check checkstyle:check` checks formatting and lint; `./mvnw spotless:apply` applies Java formatting. On Windows use `mvnw.cmd`. See the root README for prerequisites and command effects.
 
-The first backend implementation should add the Maven `pom.xml` and document prerequisites and exact commands for installation, local development, production builds, testing, and linting in `README.md`. Document configuration and Docker/Docker Compose commands when that infrastructure is introduced, and GitHub Actions workflows when CI/CD is added. Explain important commands for learning, and do not present unconfigured commands as usable. Commit dependency lockfiles when supported by the selected tooling.
+Keep prerequisites and exact commands for installation, local development, artifact builds, testing, and linting up to date in `README.md`. Document configuration and Docker/Docker Compose commands when that infrastructure is introduced, and GitHub Actions workflows when CI/CD is added. Explain important commands for learning, and do not present unconfigured commands as usable. Commit dependency lockfiles when supported by the selected tooling.
 
 ## Coding Style & Naming Conventions
 
-Java 25 is selected for the backend; no formatter or linter is configured yet. Follow Java conventions and configure formatting and linting before adding substantial code. Follow the conventions of the frontend language once its technology is defined.
+Java 25 is selected for the backend. Spotless with Google Java Format and a minimal Checkstyle configuration are configured in the Maven build and run during `validate`. Follow Java conventions and configure formatting and linting before adding substantial code. Follow the conventions of the frontend language once its technology is defined.
 
 Use descriptive names, consistent indentation within each file, and small modules with clear responsibilities. Prefer names that describe behavior or domain concepts over abbreviations. Keep formatting-only changes separate from functional changes when practical.
 
 ## Testing Guidelines
 
-JUnit 5 is selected for backend automated tests, but no testing framework or coverage threshold is configured yet. Introduce automated tests with the first functional implementation and document their location, naming convention, and execution command in `README.md`.
+JUnit 5 is configured through Spring Boot Starter Test. Tests are in `backend/src/test/java`, mirror application packages, and use names ending in `Test`. The initial context test starts without a database. No coverage threshold is configured yet. Add automated tests with each functional implementation and keep their location, naming convention, and execution command documented in `README.md`.
 
 Test observable behavior, including invalid inputs and failure paths. Every bug fix should include a regression test when feasible. Report which checks ran and any checks that could not run.
 
