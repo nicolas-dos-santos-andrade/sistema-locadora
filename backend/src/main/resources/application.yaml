@@ -1,0 +1,10 @@
+spring:
+  application:
+    name: locadora
+  # Temporário: a etapa inicial inclui JPA, mas ainda não possui banco de dados.
+  # Remover estas exclusões quando a persistência for implementada.
+  autoconfigure:
+    exclude:
+      - org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration
+      - org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration
+      - org.springframework.boot.autoconfigure.data.jpa.JpaRepositoriesAutoConfiguration
